@@ -1,0 +1,30 @@
+name: Lint Python Code
+
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+
+      - name: Set up python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+
+      - name: Run Python syntax check
+        run: python -m py_compile monitor.py
+
+
+
