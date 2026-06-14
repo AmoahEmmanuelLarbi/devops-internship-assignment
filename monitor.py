@@ -49,10 +49,8 @@ def log_directory_files():
 
                     # write to file(log.txt)
                     logfile.write(
-                        f"{filename:<22} \t\t | {file_size_in_kb:.2f} KB \t | {file_timestamp:>24}\n"
+                        f"{filename:<20} \t\t | {file_size_in_kb:.2f} KB \t | {file_timestamp:>24}\n"
                     )
-
-        # logfile.close()
 
     except FileNotFoundError as e:
         print(f"Error: {e}")
