@@ -18,37 +18,41 @@ def log_directory_files():
 
         print(f"Scanning target folder {target_directory} ...")
 
-        # open file
-        logfile = open("log.txt", "w", encoding="utf-8")
-        logfile.write("FILE NAME \t\t\t\t FILE SIZE IN KB \t\t FILE TIMESTAMP\n")
+        # open file with context manager
+        with open("log.txt", "w", encoding="utf-8") as logfile:
+            # logfile = open("log.txt", "w", encoding="utf-8")
+            logfile.write(
+                "FILE NAME \t\t\t | FILE SIZE IN KB \t\t | FILE TIMESTAMP (MM:DD:YY H:M:S)\n"
+            )
+            logfile.write("-" * 75 + "\n")
 
-        # get all files in the target directory
-        # loop through the files in the directory and log to a file
-        for file in target_directory.iterdir():
-            if file.is_file():
+            # get all files in the target directory
+            # loop through the files in the directory and log to a file
+            for file in target_directory.iterdir():
+                if file.is_file():
 
-                # ignore log.txt
-                if file.name == "log.txt":
-                    continue
-                # get file name
-                filename = file.name
+                    # ignore log.txt
+                    if file.name == "log.txt":
+                        continue
+                    # get file name
+                    filename = file.name
 
-                # get file size in KB
-                file_info = file.stat()
-                file_size_in_bytes = file_info.st_size
-                file_size_in_kb = file_size_in_bytes / 1024
+                    # get file size in KB
+                    file_info = file.stat()
+                    file_size_in_bytes = file_info.st_size
+                    file_size_in_kb = file_size_in_bytes / 1024
 
-                # get file timestamp
-                timestamp = file_info.st_mtime
-                file_timestamp = datetime.fromtimestamp(timestamp)
-                file_timestamp = file_timestamp.strftime("%m-%d-%Y %H:%M:%S")
+                    # get file timestamp
+                    timestamp = file_info.st_mtime
+                    file_timestamp = datetime.fromtimestamp(timestamp)
+                    file_timestamp = file_timestamp.strftime("%m-%d-%Y %H:%M:%S")
 
-                # write to file(log.txt)
-                logfile.write(
-                    f"{filename} \t\t\t\t {file_size_in_kb:.2f} KB \t\t {file_timestamp}\n"
-                )
+                    # write to file(log.txt)
+                    logfile.write(
+                        f"{filename:<22} \t\t | {file_size_in_kb:.2f} KB \t | {file_timestamp:>24}\n"
+                    )
 
-        logfile.close()
+        # logfile.close()
 
     except FileNotFoundError as e:
         print(f"Error: {e}")
