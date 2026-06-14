@@ -20,7 +20,7 @@ def log_directory_files():
 
         # open file with context manager
         with open("log.txt", "w", encoding="utf-8") as logfile:
-            # logfile = open("log.txt", "w", encoding="utf-8")
+
             logfile.write(
                 "FILE NAME \t\t\t | FILE SIZE IN KB \t\t | FILE TIMESTAMP (MM:DD:YY H:M:S)\n"
             )
@@ -62,5 +62,5 @@ def main():
     log_directory_files()
 
 
-if __name__ == "__main__":
+if __name__ == "__main__"():
     main()
