@@ -62,5 +62,5 @@ def main():
     log_directory_files()
 
 
-if __name__ == "__main__"
+if __name__ == "__main__":
     main()
